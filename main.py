@@ -69,3 +69,31 @@ def create_movie(
     return movies
 
 #METODO PUT
+@app.put('/movies/{id}', tags=["Movies"])
+def update_movie(
+    id: int,
+    title: str = Body(), 
+    overview: str = Body(), 
+    year: int =Body(), 
+    rating: float = Body(), 
+    category: str = Body()
+):
+    for movie in movies:
+        if movie['id'] == id:
+            movie['title'] = title
+            movie['overview'] = overview
+            movie['year'] = year
+            movie['rating'] = rating
+            movie['category'] = category
+            return movies
+    raise HTTPException(status_code=404, detail="Movie not found")
+
+#METODO DELETE
+@app.delete('/movies/{id}', tags=["Movies"])
+def delete_movie(id: int):
+    for movie in movies:
+        if movie['id'] == id:
+            movies.remove(movie)
+            return movies
+    raise HTTPException(status_code=404, detail="Movie not found")
+
