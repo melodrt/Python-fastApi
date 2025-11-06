@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Body
 
 app = FastAPI()
 app.title = "Mi primera API con FastAPI"
@@ -23,6 +23,7 @@ movies = [
     }
 ]
 
+#METODO GET
 @app.get("/home", tags=["Home"])
 def home():
     return "Hola mundo"
@@ -46,3 +47,25 @@ def get_movi_by_category(category: str):
             return movie
     # Si no encontramos la película, devolvemos 404
     raise HTTPException(status_code=404, detail="Movie not found")
+
+#METODO POST
+@app.post('/movies', tags=["Movies"])
+def create_movie(
+    id: int = Body(), 
+    title: str = Body(), 
+    overview: str = Body(), 
+    year: int =Body(), 
+    rating: float = Body(), 
+    category: str = Body()
+    ):
+    movies.append({
+        "id": id,
+        "title": title,
+        "overview": overview,
+        "year": year,
+        "rating": rating,
+        "category": category
+    })
+    return movies
+
+#METODO PUT
