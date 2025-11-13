@@ -46,7 +46,9 @@ class MovieUpdate(BaseModel):
     category:str
     
 movies: List[Movie] = [
-    
+    Movie(id=1, title="El Padrino", overview="La historia de la familia Corleone.", year=1972, rating=9.2, category="Drama"),
+    Movie(id=2, title="The Dark Knight", overview="Batman enfrenta al Joker en Gotham City.", year=2008, rating=9.0, category="Action"),
+    Movie(id=3, title="Nueva Película", overview="Descripción de la nueva película", year=2023, rating=8.5, category="Action")
 ]
 
 #METODO GET
